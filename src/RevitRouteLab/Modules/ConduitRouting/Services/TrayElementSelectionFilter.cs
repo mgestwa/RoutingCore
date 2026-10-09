@@ -1,8 +1,8 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI.Selection;
-using INP_IE.ConduitManager.Services;
+using RevitRouteLab.ConduitManager.Services;
 
-namespace INP_IE.ConduitRouting.Services
+namespace RevitRouteLab.ConduitRouting.Services
 {
     public class TrayElementSelectionFilter : ISelectionFilter
     {

@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     public class ConduitRouteMetadata
     {

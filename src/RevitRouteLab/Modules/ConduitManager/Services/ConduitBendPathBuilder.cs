@@ -1,7 +1,7 @@
 using System;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     /// <summary>
     /// Wspólna matematyka narożników trasy. Używana zarówno przy prowadzeniu

@@ -7,15 +7,15 @@ using System.Windows.Media;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.Plumbing;
-using INP_IE.ConduitManager.Services;
-using INP_IE.ConduitRouting.Models;
+using RevitRouteLab.ConduitManager.Services;
+using RevitRouteLab.ConduitRouting.Models;
 using Canvas = System.Windows.Controls.Canvas;
 using Color = System.Windows.Media.Color;
 using Rectangle = System.Windows.Shapes.Rectangle;
 using Ellipse = System.Windows.Shapes.Ellipse;
 using SelectionChangedEventArgs = System.Windows.Controls.SelectionChangedEventArgs;
 
-namespace INP_IE.ConduitRouting.Views
+namespace RevitRouteLab.ConduitRouting.Views
 {
     public partial class ConduitRoutingSettingsWindow : Window
     {

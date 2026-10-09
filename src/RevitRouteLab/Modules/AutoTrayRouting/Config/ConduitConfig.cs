@@ -1,6 +1,6 @@
 using Autodesk.Revit.DB;
 
-namespace INP_IE.AutoTrayRouting.Config
+namespace RevitRouteLab.AutoTrayRouting.Config
 {
     /// <summary>
     /// Configuration for conduit routing

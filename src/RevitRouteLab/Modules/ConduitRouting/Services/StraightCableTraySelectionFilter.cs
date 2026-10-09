@@ -2,7 +2,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI.Selection;
 
-namespace INP_IE.ConduitRouting.Services
+namespace RevitRouteLab.ConduitRouting.Services
 {
     /// <summary>
     /// Pozwala wskazać wyłącznie proste odcinki korytek, które mogą być

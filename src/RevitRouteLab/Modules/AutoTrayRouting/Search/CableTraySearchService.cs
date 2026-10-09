@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
-using INP_IE.AutoTrayRouting.Config;
-using INP_IE.AutoTrayRouting.Geometry;
+using RevitRouteLab.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Geometry;
 
-namespace INP_IE.AutoTrayRouting.Search
+namespace RevitRouteLab.AutoTrayRouting.Search
 {
     /// <summary>
     /// Finds nearest cable tray segment candidates and computes cost for connection.

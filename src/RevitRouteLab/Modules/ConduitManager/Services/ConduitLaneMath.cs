@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     /// <summary>
     /// Pure allocation math kept independent from the Revit API so it can be

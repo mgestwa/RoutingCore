@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     public class ConduitCreationResult
     {

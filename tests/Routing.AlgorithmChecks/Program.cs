@@ -1,7 +1,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
-using INP_IE.ConduitManager.Models;
-using INP_IE.ConduitManager.Services;
+using RevitRouteLab.ConduitManager.Models;
+using RevitRouteLab.ConduitManager.Services;
 
 var finder = new ConduitPathfinder();
 var checks = 0;
@@ -29,7 +29,7 @@ Check(!finder.TryFindShortestPath(weighted, "s", "missing", out _), "Unreachable
 Check(finder.ComputeDistances(weighted, "s")["a"] == 2 && finder.ComputeDistances(weighted, "s")["t"] == 5,
     "Single-source distances used by automatic endpoint ranking");
 Check(finder.ComputeDistances(weighted, "missing").Count == 0, "Missing start produces no distances");
-Check(!finder.TryFindShortestPath(weighted, "s", "s", out _), "Preserved source contract: no empty start=end route");
+Check(!finder.TryFindShortestPath(weighted, "s", "s", out _), "No empty start=end route");
 
 var ties = new[] { Edge("s", "b", 1), Edge("b", "t", 1), Edge("s", "a", 1), Edge("a", "t", 1) };
 Check(finder.TryFindShortestPath(Graph(ties), "s", "t", out path) && PathKeys(path) == "a,t", "Deterministic tie by node name");
@@ -89,5 +89,5 @@ for (var sample = 0; sample < 100; sample++)
         }
     }
 }
-Console.WriteLine($"PASS: {checks} assertions; 100 random graphs; original pathfinder and graph sources compiled directly.");
+Console.WriteLine($"PASS: {checks} assertions; 100 random graphs; pathfinder and graph sources compiled directly.");
 Console.WriteLine("These checks do not exercise Revit geometry or runtime integration.");

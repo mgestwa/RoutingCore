@@ -1,6 +1,6 @@
-﻿using INP_IE.ConduitRouting.Models;
+﻿using RevitRouteLab.ConduitRouting.Models;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     public class ConduitExecutionPlan
     {

@@ -3,9 +3,8 @@
 [Oo]bj/
 *_wpftmp.csproj
 
-# Generated Revit add-in packages and delivery checksums
+# Generated Revit add-in packages
 /artifacts/
-/delivery-sha256.json
 
 # Visual Studio, Rider and per-user IDE settings
 .vs/
@@ -63,4 +62,4 @@ Desktop.ini
 *_backup/
 
 # Keep source code, XAML, project/solution files, scripts, documentation,
-# extraction-manifest.json and default JSON configuration in the repository.
+# and default JSON configuration in the repository.

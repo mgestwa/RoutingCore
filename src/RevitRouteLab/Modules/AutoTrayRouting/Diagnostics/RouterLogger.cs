@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.UI;
 
-namespace INP_IE.AutoTrayRouting.Diagnostics
+namespace RevitRouteLab.AutoTrayRouting.Diagnostics
 {
     /// <summary>
     /// Lightweight logger for routing session. Stores infos and warnings and shows a summary dialog.

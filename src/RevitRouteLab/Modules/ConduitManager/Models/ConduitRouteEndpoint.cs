@@ -1,7 +1,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     /// <summary>
     /// Sposób, w jaki trasa zaczyna się albo kończy.

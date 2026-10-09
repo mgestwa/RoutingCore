@@ -1,4 +1,4 @@
-# Mapa wydzielonych modułów
+# Architektura Revit Route Lab
 
 ## Przepływ
 
@@ -36,12 +36,12 @@ Wszystkie poniższe ścieżki są względne wobec `src/RevitRouteLab/Modules`.
 | `AutoTrayRouting/Routing/PathPlanner.cs` | Geometryczne planowanie dojścia do korytka |
 | `AutoTrayRouting/Routing/ConnectionBuilder.cs` | Tworzenie połączeń korytek |
 
-## Granice wydzielenia
+## Granice modułów
 
-Oryginalne `ConduitManagerWorkflow`, jego części, baza projektu i interfejs Circuit Managera nie zostały skopiowane. Ich rolę w uruchamianiu trasowania przejęły małe polecenia `RevitRouteLab.Commands`. Oryginalne polecenia zależne od Nice3point również zastąpiono adapterami opartymi na `IExternalCommand`. Nie są potrzebne pakiety Nice3point, CommunityToolkit ani OpenXML.
+Polecenia `RevitRouteLab.Commands` implementują `IExternalCommand` i odpowiadają za wybór elementów, ustawienia oraz przegląd planu. Moduły trasowania odpowiadają za graf, geometrię i wykonanie operacji. Serwis metadanych używa opcjonalnych parametrów `RouteLab_*`; standardowe polecenia nie przekazują metadanych relacji.
 
-Algorytmy nadal używają typów Autodesk. To samodzielny projekt dodatku Revit, nie program EXE pracujący na plikach RVT poza Revitem. Testy konsolowe wykonują wyłącznie logikę grafową na danych syntetycznych.
+Algorytmy używają typów Autodesk. To samodzielny projekt dodatku Revit, nie program EXE pracujący na plikach RVT poza Revitem. Testy konsolowe wykonują wyłącznie logikę grafową na danych syntetycznych.
 
 ## Ewentualny rozwój A*
 
-Punktem wejścia jest `ConduitPathfinder.TryFindShortestPath`. Obecny algorytm używa kosztu przebytej drogi. A* wymagałby jawnego dodania heurystyki i sprawdzenia jej dopuszczalności względem kosztów konektorów i mostków. Wyszukiwanie kosztów do wszystkich kandydatów nadal ma zastosowanie dla Dijkstry. Nie wprowadzono takiej zmiany w ramach wiernego wydzielenia.
+Punktem wejścia jest `ConduitPathfinder.TryFindShortestPath`. Obecny algorytm używa kosztu przebytej drogi. A* wymagałby jawnego dodania heurystyki i sprawdzenia jej dopuszczalności względem kosztów konektorów i mostków. Wyszukiwanie kosztów do wszystkich kandydatów nadal ma zastosowanie dla Dijkstry. Obecna implementacja wykorzystuje algorytm Dijkstry.

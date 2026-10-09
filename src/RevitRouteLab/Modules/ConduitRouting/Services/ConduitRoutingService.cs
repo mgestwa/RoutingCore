@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
-using INP_IE.ConduitManager.Models;
-using INP_IE.ConduitManager.Services;
-using INP_IE.ConduitRouting.Models;
+using RevitRouteLab.ConduitManager.Models;
+using RevitRouteLab.ConduitManager.Services;
+using RevitRouteLab.ConduitRouting.Models;
 
-namespace INP_IE.ConduitRouting.Services
+namespace RevitRouteLab.ConduitRouting.Services
 {
     public class ConduitRoutingService
     {

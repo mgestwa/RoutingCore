@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using INP_IE.ConduitManager.Models;
+using RevitRouteLab.ConduitManager.Models;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     public class ConduitPathfinder
     {

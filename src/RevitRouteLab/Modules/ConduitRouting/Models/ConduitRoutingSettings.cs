@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitRouting.Models
+namespace RevitRouteLab.ConduitRouting.Models
 {
     public enum ConduitLayoutMode
     {

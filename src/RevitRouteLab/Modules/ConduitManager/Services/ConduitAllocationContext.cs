@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     /// <summary>
     /// Occupancy shared by all routes prepared in one operation. It contains

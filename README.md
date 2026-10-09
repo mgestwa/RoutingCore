@@ -65,7 +65,7 @@ scripts/                       # Kompilacja, pakowanie, instalacja
 docs/                          # Architektura i wyniki weryfikacji
 ```
 
-Moduły trasowania wydzielono z większej aplikacji INP_IE do niezależnego dodatku z własną biblioteką, identyfikatorem i procesem budowania. Zachowane przestrzenie nazw `INP_IE.*` odzwierciedlają pochodzenie kodu; projekt nie wymaga oryginalnej aplikacji. Granice modułów i ich odpowiedzialności opisuje [mapa architektury](docs/ARCHITECTURE.md).
+Projekt jest samodzielnym dodatkiem z własną biblioteką `RevitRouteLab.dll`, identyfikatorem i procesem budowania. Kod używa przestrzeni nazw `RevitRouteLab.*`. Granice modułów i ich odpowiedzialności opisuje [mapa architektury](docs/ARCHITECTURE.md).
 
 ## Sprawdź algorytm bez Revita
 
@@ -108,6 +108,6 @@ Po instalacji karta **Route Lab** udostępnia pięć poleceń:
 
 ## Status i zakres
 
-W repozytorium znajdują się wyniki kompilacji i testów algorytmicznych. Uruchomienie tej wydzielonej wersji dodatku wewnątrz Revita pozostaje do zweryfikowania według [scenariuszy ręcznych](docs/REVIT-SMOKE-TESTS.md). Szczegółowy [raport walidacji](docs/VALIDATION.md) opisuje również ostrzeżenia kompilatora i zgodność z API.
+W repozytorium znajdują się wyniki kompilacji i testów algorytmicznych. Uruchomienie dodatku wewnątrz Revita pozostaje do zweryfikowania według [scenariuszy ręcznych](docs/REVIT-SMOKE-TESTS.md). Szczegółowy [raport walidacji](docs/VALIDATION.md) opisuje również ostrzeżenia kompilatora i zgodność z API.
 
 Trasowanie działa na sieci korytek aktywnego dokumentu. Wyszukiwanie wykorzystuje **algorytm Dijkstry**; przydział torów uwzględnia zajętość conduitami, ale projekt nie zapewnia ogólnego omijania wszystkich przeszkód budowlanych. Revit 2026 wymaga migracji obsługi identyfikatorów elementów i obecnie nie jest obsługiwany.

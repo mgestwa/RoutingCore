@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using INP_IE.ConduitManager.Models;
-using INP_IE.ConduitRouting.Models;
+using RevitRouteLab.ConduitManager.Models;
+using RevitRouteLab.ConduitRouting.Models;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     public static class ConduitPlanAnalyzer
     {

@@ -8,7 +8,7 @@ using Autodesk.Revit.UI;
 
 #nullable disable
 
-namespace INP_IE.AutoTrayRouting.Routing
+namespace RevitRouteLab.AutoTrayRouting.Routing
 {
     public class ConnectionBuilder
     {

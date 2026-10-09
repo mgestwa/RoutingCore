@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
-using INP_IE.ConduitManager.Services;
+using RevitRouteLab.ConduitManager.Services;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     /// <summary>
     /// Rodzaj krawędzi grafu korytek. <see cref="TrayRun"/> i <see cref="FittingRun"/>

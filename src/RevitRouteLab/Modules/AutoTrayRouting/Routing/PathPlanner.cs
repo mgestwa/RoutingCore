@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
-using INP_IE.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Config;
 
-namespace INP_IE.AutoTrayRouting.Routing
+namespace RevitRouteLab.AutoTrayRouting.Routing
 {
     /// <summary>
     /// Path planner with micro-optimization: ensures sufficient horizontal lead for an elbow

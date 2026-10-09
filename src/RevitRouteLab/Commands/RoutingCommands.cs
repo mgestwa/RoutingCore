@@ -4,13 +4,13 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using INP_IE.AutoTrayRouting;
-using INP_IE.AutoTrayRouting.Config;
-using INP_IE.ConduitManager.Models;
-using INP_IE.ConduitManager.Services;
-using INP_IE.ConduitRouting.Models;
-using INP_IE.ConduitRouting.Services;
-using INP_IE.ConduitRouting.Views;
+using RevitRouteLab.AutoTrayRouting;
+using RevitRouteLab.AutoTrayRouting.Config;
+using RevitRouteLab.ConduitManager.Models;
+using RevitRouteLab.ConduitManager.Services;
+using RevitRouteLab.ConduitRouting.Models;
+using RevitRouteLab.ConduitRouting.Services;
+using RevitRouteLab.ConduitRouting.Views;
 
 namespace RevitRouteLab.Commands;
 
@@ -82,7 +82,7 @@ public abstract class RoutingCommand : IExternalCommand
         }
         if (result != TaskDialogResult.CommandLink1) return Result.Cancelled;
 
-        // No Circuit Manager metadata or project store: this is an independent routing operation.
+        // Routing commands execute geometry plans without writing relation metadata.
         report = service.ExecutePreparedPlan(plan);
         new TaskDialog("Route Lab")
         {

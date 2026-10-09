@@ -1,7 +1,7 @@
 using System;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitRouting.Models
+namespace RevitRouteLab.ConduitRouting.Models
 {
     /// <summary>
     /// Rodzaj odcinka trasy. Odcinki prowadzone po korytku i kształtce mają

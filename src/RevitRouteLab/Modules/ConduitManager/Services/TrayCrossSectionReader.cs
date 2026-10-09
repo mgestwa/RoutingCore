@@ -2,7 +2,7 @@ using System;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     /// <summary>
     /// Reads the usable cross-section width of a cable tray or a tray fitting.

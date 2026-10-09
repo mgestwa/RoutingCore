@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
-using INP_IE.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Config;
 
-namespace INP_IE.AutoTrayRouting.Services
+namespace RevitRouteLab.AutoTrayRouting.Services
 {
     /// <summary>
     /// Resolves service type string based on rules in settings and inspected element/type.

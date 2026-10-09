@@ -31,7 +31,7 @@
     </None>
   </ItemGroup>
   <Target Name="CheckRevitVersion" BeforeTargets="PrepareForBuild">
-    <Error Condition="'$(RevitVersion)' != '2024' and '$(RevitVersion)' != '2025'" Text="Supported Revit versions: 2024, 2025. Revit 2026 requires migrating the copied ElementId.IntegerValue usages." />
+    <Error Condition="'$(RevitVersion)' != '2024' and '$(RevitVersion)' != '2025'" Text="Supported Revit versions: 2024, 2025. Revit 2026 requires migrating ElementId.IntegerValue usages." />
     <Error Condition="!Exists('$(RevitApiPath)\RevitAPI.dll')" Text="Revit API missing. Install Revit $(RevitVersion) or set RevitApiPath." />
   </Target>
 </Project>

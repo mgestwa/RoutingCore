@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitManager.Models
+namespace RevitRouteLab.ConduitManager.Models
 {
     /// <summary>
     /// Sieć korytek zebrana dla jednej trasy wraz z przerwami, które trzeba było

@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
-using INP_IE.ConduitRouting.Models;
+using RevitRouteLab.ConduitRouting.Models;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     public class ConduitPositionAllocator
     {

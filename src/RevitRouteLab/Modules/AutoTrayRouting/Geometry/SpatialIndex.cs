@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.AutoTrayRouting.Geometry
+namespace RevitRouteLab.AutoTrayRouting.Geometry
 {
     /// <summary>
     /// Simple spatial index for tray segments using their bounding boxes and levels for quick candidate filtering.

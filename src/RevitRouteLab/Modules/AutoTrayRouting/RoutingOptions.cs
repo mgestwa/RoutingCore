@@ -1,6 +1,6 @@
-using INP_IE.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Config;
 
-namespace INP_IE.AutoTrayRouting
+namespace RevitRouteLab.AutoTrayRouting
 {
     /// <summary>
     /// Options for what to create during auto-routing

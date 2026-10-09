@@ -5,7 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace INP_IE.AutoTrayRouting.Config
+namespace RevitRouteLab.AutoTrayRouting.Config
 {
     /// <summary>
     /// DTO for AutoTray routing settings loaded from JSON. Values in mm are converted to ft on load.

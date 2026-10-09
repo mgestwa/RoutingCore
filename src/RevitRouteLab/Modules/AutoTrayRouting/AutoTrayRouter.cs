@@ -4,13 +4,13 @@ using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI;
-using INP_IE.AutoTrayRouting.Config;
-using INP_IE.AutoTrayRouting.Diagnostics;
-using INP_IE.AutoTrayRouting.Routing;
-using INP_IE.AutoTrayRouting.Search;
-using INP_IE.AutoTrayRouting.Services;
+using RevitRouteLab.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Diagnostics;
+using RevitRouteLab.AutoTrayRouting.Routing;
+using RevitRouteLab.AutoTrayRouting.Search;
+using RevitRouteLab.AutoTrayRouting.Services;
 
-namespace INP_IE.AutoTrayRouting
+namespace RevitRouteLab.AutoTrayRouting
 {
     /// <summary>
     /// Orchestrates the AutoRoute process for two selected elements.
@@ -61,7 +61,7 @@ namespace INP_IE.AutoTrayRouting
                 StrictFittingsOnly = StrictFittingsOnlyDefault
             };
 
-            var tg = new TransactionGroup(doc, "INP_IE AutoRoute Cable Trays");
+            var tg = new TransactionGroup(doc, "RevitRouteLab AutoRoute Cable Trays");
             tg.Start();
 
             try
@@ -79,7 +79,7 @@ namespace INP_IE.AutoTrayRouting
             }
 
             logger.Info($"Config StrictFittingsOnly={builder.StrictFittingsOnly}, MinLegFactor={planner.MinLegFactor:F2}, ShortCurveTolFactor={planner.ShortCurveTolFactor:F2}");
-            logger.ShowSummary("INP_IE AutoRoute");
+            logger.ShowSummary("RevitRouteLab AutoRoute");
             return Result.Succeeded;
         }
 
@@ -412,7 +412,7 @@ namespace INP_IE.AutoTrayRouting
                     {
                         var e = doc.GetElement(id);
                         SetParam(e, BuiltInParameter.RBS_CTC_SERVICE_TYPE, desired);
-                        SetParam(e, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS, $"INP_IE_AutoRoute {System.DateTime.Now:yyyy-MM-dd HH:mm}");
+                        SetParam(e, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS, $"RevitRouteLab_AutoRoute {System.DateTime.Now:yyyy-MM-dd HH:mm}");
                     }
                 }
 
@@ -433,7 +433,7 @@ namespace INP_IE.AutoTrayRouting
                         {
                             SetParam(e, BuiltInParameter.RBS_ELEC_CIRCUIT_TYPE, options.ConduitConfig.ServiceType);
                         }
-                        SetParam(e, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS, $"INP_IE_AutoRoute_Conduit {System.DateTime.Now:yyyy-MM-dd HH:mm}");
+                        SetParam(e, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS, $"RevitRouteLab_AutoRoute_Conduit {System.DateTime.Now:yyyy-MM-dd HH:mm}");
                     }
                 }
 

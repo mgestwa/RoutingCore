@@ -15,7 +15,7 @@ public sealed class Application : IExternalApplication
         Add<Commands.RouteViaTrayCommand>(panel, "Przez\nkorytko", "Wyznacz najkrótszą trasę przechodzącą przez wybrane proste korytko.");
         Add<Commands.RouteDevicesCommand>(panel, "Między\nurządzeniami", "Dobierz końce trasy do dwóch wskazanych urządzeń i wyznacz conduit po korytkach.");
         Add<Commands.FillTraysCommand>(panel, "Conduit\nw korytkach", "Utwórz conduit w zaznaczonych korytkach i kształtkach.");
-        Add<Commands.AutoTrayCommand>(panel, "Auto\nkorytka", "Uruchom skopiowany AutoTrayRouter dla dwóch wybranych elementów.");
+        Add<Commands.AutoTrayCommand>(panel, "Auto\nkorytka", "Uruchom AutoTrayRouter dla dwóch wybranych elementów.");
         return Result.Succeeded;
     }
 

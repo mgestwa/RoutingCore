@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Autodesk.Revit.DB;
-using INP_IE.ConduitManager.Models;
-using INP_IE.ConduitRouting.Models;
+using RevitRouteLab.ConduitManager.Models;
+using RevitRouteLab.ConduitRouting.Models;
 
-namespace INP_IE.ConduitManager.Services
+namespace RevitRouteLab.ConduitManager.Services
 {
     public class ConduitMetadataWriter
     {
@@ -38,15 +38,15 @@ namespace INP_IE.ConduitManager.Services
             foreach (var createdSegment in createdSegments)
             {
                 var conduit = createdSegment.Conduit;
-                TrySetParameter(conduit, "INP_RelacjaId", metadata.RelationId, report);
-                TrySetParameter(conduit, "INP_Relacja", metadata.Relation, report);
-                TrySetParameter(conduit, "INP_DlugoscRelacji", metadata.RelationLengthMm, report);
-                TrySetParameter(conduit, "INP_DlugoscFN", metadata.FnLengthMm, report);
-                TrySetParameter(conduit, "INP_DlugoscPE", metadata.PeLengthMm, report);
-                TrySetParameter(conduit, "INP_RelacjaOd", metadata.FromLabel, report, false);
-                TrySetParameter(conduit, "INP_RelacjaDo", metadata.ToLabel, report, false);
-                TrySetParameter(conduit, "INP_RelacjaOdElementId", GetElementIdValue(metadata.FromElementId), report, false);
-                TrySetParameter(conduit, "INP_RelacjaDoElementId", GetElementIdValue(metadata.ToElementId), report, false);
+                TrySetParameter(conduit, "RouteLab_RelacjaId", metadata.RelationId, report);
+                TrySetParameter(conduit, "RouteLab_Relacja", metadata.Relation, report);
+                TrySetParameter(conduit, "RouteLab_DlugoscRelacji", metadata.RelationLengthMm, report);
+                TrySetParameter(conduit, "RouteLab_DlugoscFN", metadata.FnLengthMm, report);
+                TrySetParameter(conduit, "RouteLab_DlugoscPE", metadata.PeLengthMm, report);
+                TrySetParameter(conduit, "RouteLab_RelacjaOd", metadata.FromLabel, report, false);
+                TrySetParameter(conduit, "RouteLab_RelacjaDo", metadata.ToLabel, report, false);
+                TrySetParameter(conduit, "RouteLab_RelacjaOdElementId", GetElementIdValue(metadata.FromElementId), report, false);
+                TrySetParameter(conduit, "RouteLab_RelacjaDoElementId", GetElementIdValue(metadata.ToElementId), report, false);
             }
         }
 

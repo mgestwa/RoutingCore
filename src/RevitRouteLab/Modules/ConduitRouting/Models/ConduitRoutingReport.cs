@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
 
-namespace INP_IE.ConduitRouting.Models
+namespace RevitRouteLab.ConduitRouting.Models
 {
     public class ConduitRoutingReport
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
-using INP_IE.AutoTrayRouting.Config;
+using RevitRouteLab.AutoTrayRouting.Config;
 
-namespace INP_IE.AutoTrayRouting.Routing
+namespace RevitRouteLab.AutoTrayRouting.Routing
 {
     /// <summary>
     /// Builds conduit routes along planned paths
