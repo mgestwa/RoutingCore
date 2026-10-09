@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPathfinder.cs" Link="Production/ConduitPathfinder.cs" />
+    <Compile Include="../../src/RevitRouteLab/Modules/ConduitManager/Services/TrayElementClassifier.cs" Link="Production/TrayElementClassifier.cs" />
+    <Compile Include="../../src/RevitRouteLab/Modules/ConduitManager/Models/TrayGraph.cs" Link="Production/TrayGraph.cs" />
+    <Compile Include="../../src/RevitRouteLab/Modules/ConduitManager/Models/TrayGraphEdge.cs" Link="Production/TrayGraphEdge.cs" />
+  </ItemGroup>
+</Project>

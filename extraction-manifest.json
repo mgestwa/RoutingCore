@@ -1,0 +1,271 @@
+{
+  "source": "C:\\Users\\m.gestwa\\Documents\\20. INP_IE\\INP_IE\\INP_IE",
+  "date": "2026-10-09",
+  "files": [
+    {
+      "source": "AutoTrayRouting/AutoTrayRouter.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/AutoTrayRouter.cs",
+      "sha256": "3e1c8a078d2d2400dd6febb39841725b6830982eba2579ae59543019aaccb0b3"
+    },
+    {
+      "source": "AutoTrayRouting/Config/AutoTrayRouting.default.json",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Config/AutoTrayRouting.default.json",
+      "sha256": "28efd7c3e97e6b904ab21f201eaab339cc3cee06e9d8feb39a980053fc8a865d"
+    },
+    {
+      "source": "AutoTrayRouting/Config/AutoTrayRoutingSettings.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Config/AutoTrayRoutingSettings.cs",
+      "sha256": "1a94d76e56b0390b43733eaeb108a1ca2408f76b3c1d770a5125844fa1227c52"
+    },
+    {
+      "source": "AutoTrayRouting/Config/ConduitConfig.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Config/ConduitConfig.cs",
+      "sha256": "6ac20ea1257b34cbf217fd0433ec3716f77299752d5f4d9f6d740df8318e8307"
+    },
+    {
+      "source": "AutoTrayRouting/Diagnostics/RouterLogger.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Diagnostics/RouterLogger.cs",
+      "sha256": "b70be90618876f78323be7aa222758279fd839cc39a6bfe22ac512316230e460"
+    },
+    {
+      "source": "AutoTrayRouting/Geometry/SpatialIndex.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Geometry/SpatialIndex.cs",
+      "sha256": "386aa94c889f4bf65a1937f4836c565bfbb8720af53ad4d09b954fbb3d4947ea"
+    },
+    {
+      "source": "AutoTrayRouting/Routing/ConduitBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Routing/ConduitBuilder.cs",
+      "sha256": "5b27aa76aee38468f3a89dd8280edfa265b1a6930750171ab2d63e3366ffbf4b"
+    },
+    {
+      "source": "AutoTrayRouting/Routing/ConnectionBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Routing/ConnectionBuilder.cs",
+      "sha256": "3458efa609aa1b209f16685271a245c9d9bf26dbc8e8a8b1c4a8954af92b4c09"
+    },
+    {
+      "source": "AutoTrayRouting/Routing/PathPlanner.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Routing/PathPlanner.cs",
+      "sha256": "694bd9f8a95ccfb33def9932cdcdec22e4557b093a1eb56449c506c5f81c201c"
+    },
+    {
+      "source": "AutoTrayRouting/RoutingOptions.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/RoutingOptions.cs",
+      "sha256": "d1fcd8ca8613bd73485b67c20f7f65c31079c899ae1bb1154f9b40add874bd2e"
+    },
+    {
+      "source": "AutoTrayRouting/Search/CableTraySearchService.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Search/CableTraySearchService.cs",
+      "sha256": "b69325eb1a559237e608c4a157ac5b5dd0120625b65a2b9e362ac1ffcde39e76"
+    },
+    {
+      "source": "AutoTrayRouting/Services/ServiceTypeResolver.cs",
+      "copy": "src/RevitRouteLab/Modules/AutoTrayRouting/Services/ServiceTypeResolver.cs",
+      "sha256": "762c26c0f65786c991f925b1a8d0c83e62227f041c93d801f95de8825d15e6da"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitAutomaticRouteEndpoints.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitAutomaticRouteEndpoints.cs",
+      "sha256": "6d1f036a0ae6fe197ca5a9c162fdc15029c8107b62a9d200a5399c492ae276ae"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitCreatedSegment.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitCreatedSegment.cs",
+      "sha256": "1723314ce026c6bc5c6afaf07835f96263339c72eaa1ec3e866d95f43cfce282"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitCreationResult.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitCreationResult.cs",
+      "sha256": "59e86725063931041a06f3d53b17f3692d5d095a916500a90817d7f28305b9dc"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitExecutionPlan.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitExecutionPlan.cs",
+      "sha256": "4e79357c83f5f5c1e56c69198beb5f7858180ad7a8fc569721c7fd2aeefed4a5"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitPlannedSegment.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitPlannedSegment.cs",
+      "sha256": "bba2c9f6b215d1e4dce1fc3dad8f1c877857e4a1142fb727360d01fd79163d14"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitRouteEndpoint.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitRouteEndpoint.cs",
+      "sha256": "9f07108970bfd9bd5831ce2e865f6e5040c9dd526ce02148cb73fd4fb65791ca"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitRouteMetadata.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitRouteMetadata.cs",
+      "sha256": "77765094fdc539301de2863751f927abf378bd9c50e09b41feba753ee58f60d2"
+    },
+    {
+      "source": "ConduitManager/Models/ConduitRoutePlan.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/ConduitRoutePlan.cs",
+      "sha256": "c3f5a04b7b3f58e7d6d34b0286b1a064987a3835cd704cfc321817dfcd35d77c"
+    },
+    {
+      "source": "ConduitManager/Models/TrayGapBridge.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/TrayGapBridge.cs",
+      "sha256": "a89cb43abd5f17010eb9fdb33efcffdbd3f3f4b8a6b143fe8f206fb30ef14381"
+    },
+    {
+      "source": "ConduitManager/Models/TrayGraph.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/TrayGraph.cs",
+      "sha256": "a5222aafa3bb64447a50dbb15945217fe8b9d083f900415095df09998960c437"
+    },
+    {
+      "source": "ConduitManager/Models/TrayGraphEdge.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/TrayGraphEdge.cs",
+      "sha256": "756527c49b90554839eeedcbbe67930425eb5b84d045979d208041bf31db3a74"
+    },
+    {
+      "source": "ConduitManager/Models/TrayNetworkResult.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Models/TrayNetworkResult.cs",
+      "sha256": "16ff998bf4b4771702581071a299a20bd5a01b8b6c8fc479e5751a8511bf5fb7"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitAllocationContext.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitAllocationContext.cs",
+      "sha256": "cec14109fdeeb0a7d3b5b5cfbd2fce707dca928babb2df41c6e2823e1e5b9798"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitAutomaticEndpointLocatorService.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitAutomaticEndpointLocatorService.cs",
+      "sha256": "e9e0a0924a2a55498c7a23715f9ffd108a9dab289e72784db207542926041e6f"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitBendPathBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitBendPathBuilder.cs",
+      "sha256": "a8e67360f5ae87816f2e13c3d670e23a38c6225840d4ff81a1df89df0a53c206"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitConnectorService.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitConnectorService.cs",
+      "sha256": "d3cb22be6c99d295837b0bd27e550133bb1ac7c77d1e72ac715063ebbeefa92c"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitElementFactory.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitElementFactory.cs",
+      "sha256": "9a53ac3edc34df88060019f3ac4ea46cf53c62602d7efce965d30a26c91cf3dc"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitLaneMath.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitLaneMath.cs",
+      "sha256": "864409099bd751ac6d8b1212c20755745591ebde469cf492c26f608f29874ea5"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitMetadataWriter.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitMetadataWriter.cs",
+      "sha256": "60308ce56d5506111e8ecb9ee32b4e7ffe6d53ec748d047e68b9796603e1f1a3"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitPathfinder.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPathfinder.cs",
+      "sha256": "bdbd28d0e38caf4cd2a00adaa6dd006cd055e2874f4097ab4ee5846a85011248"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitPlanAnalyzer.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPlanAnalyzer.cs",
+      "sha256": "1b28c8e7c26470d0fa8b53ff15d5397912891dea4f86c765b0ed15e425f21c96"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitPositionAllocator.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPositionAllocator.cs",
+      "sha256": "6611947e246fd37143be8e76dd5b96f4150bd3bf4b36eb63717d9a30ba6b24f1"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitRoutePlanner.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitRoutePlanner.cs",
+      "sha256": "aa7a929c2760550fa3a9b4095f8383636d51d17a05fb418b0196a9b40a213f81"
+    },
+    {
+      "source": "ConduitManager/Services/ConduitSegmentBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/ConduitSegmentBuilder.cs",
+      "sha256": "6b2cfd11c5c8e374357e6cbf2ad89b9917ee1166ae1dac108cefdaba060906dd"
+    },
+    {
+      "source": "ConduitManager/Services/FreeAirLegBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/FreeAirLegBuilder.cs",
+      "sha256": "b187b88293240c7b3ebf6f8d070b406cc2a7280932889ac25c50279f6c493519"
+    },
+    {
+      "source": "ConduitManager/Services/MepConnectorReader.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/MepConnectorReader.cs",
+      "sha256": "8d589849ed7a0142eb6963e32ab3d09d1cebc91008daf878cb6475d5a1f722fd"
+    },
+    {
+      "source": "ConduitManager/Services/RevitUnitConverter.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/RevitUnitConverter.cs",
+      "sha256": "044a3c502b5334b17ca98443fa4c5d7f7bf4427c171c411620461ea6bebe1be7"
+    },
+    {
+      "source": "ConduitManager/Services/TrayCrossSectionReader.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayCrossSectionReader.cs",
+      "sha256": "9ece385879903d8617ee038e41899c8770321a411108ce6760114a888447bfb9"
+    },
+    {
+      "source": "ConduitManager/Services/TrayElementClassifier.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayElementClassifier.cs",
+      "sha256": "d6af8a20feadc6f8c7c517061a992c08c5e6a4bf1f0860ede00a006ea8a62c84"
+    },
+    {
+      "source": "ConduitManager/Services/TrayGapBridgeService.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayGapBridgeService.cs",
+      "sha256": "71735761d6ef5bb57ea5314a8af72131ee3b7e5c6162208520d4d7ac1e5f4477"
+    },
+    {
+      "source": "ConduitManager/Services/TrayGraphBuilder.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayGraphBuilder.cs",
+      "sha256": "c1284c712f816f6d08371df0b38180180b256b788ccee9f2a05889a021f47e7f"
+    },
+    {
+      "source": "ConduitManager/Services/TrayNetworkCollector.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayNetworkCollector.cs",
+      "sha256": "d4799fc0890c775307b3acc99efdd681bb6dc33201ae8c1908258f0f6b79e2f9"
+    },
+    {
+      "source": "ConduitManager/Services/TrayServiceTypeAnalyzer.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitManager/Services/TrayServiceTypeAnalyzer.cs",
+      "sha256": "69a001b1c45db7b64375720e0af5bbd317a1d6e27a600f2332473e98489dc6a0"
+    },
+    {
+      "source": "ConduitRouting/Models/ConduitRoutingReport.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Models/ConduitRoutingReport.cs",
+      "sha256": "e915d39f731682343283d5f612bb37d34c31148ec8fc58baf4a5cd4a33bd4d37"
+    },
+    {
+      "source": "ConduitRouting/Models/ConduitRoutingSettings.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Models/ConduitRoutingSettings.cs",
+      "sha256": "44197a071e4b0f08ddce95fae3c23ee4d0565ed3a81da6ba0e50f14a8562e988"
+    },
+    {
+      "source": "ConduitRouting/Models/ConduitRunSegment.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Models/ConduitRunSegment.cs",
+      "sha256": "fb4ce7b7846bcdca104bd4b19a8b4e50cdff32870832dbe356a98d5154a16586"
+    },
+    {
+      "source": "ConduitRouting/Services/ConduitRoutingService.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Services/ConduitRoutingService.cs",
+      "sha256": "f63a3576e8c602512a2bcbd5673f19ba4df953e1fad7695fd461ef76ee322d85"
+    },
+    {
+      "source": "ConduitRouting/Services/StraightCableTraySelectionFilter.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Services/StraightCableTraySelectionFilter.cs",
+      "sha256": "109a0a12fdcd9a27ccef4933b4afec22c4b674a2706afab967ebfbc981af5f7f"
+    },
+    {
+      "source": "ConduitRouting/Services/TrayElementSelectionFilter.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Services/TrayElementSelectionFilter.cs",
+      "sha256": "110540ae95090df5e2de8f04cf254753d7710ab0ee75e390d7ba7242b430d304"
+    },
+    {
+      "source": "ConduitRouting/Views/ConduitRoutingSettingsWindow.xaml",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Views/ConduitRoutingSettingsWindow.xaml",
+      "sha256": "fea167c722aac530bda447ebc66d502c948a0ea11f4ad7cee096d49d55b83054"
+    },
+    {
+      "source": "ConduitRouting/Views/ConduitRoutingSettingsWindow.xaml.cs",
+      "copy": "src/RevitRouteLab/Modules/ConduitRouting/Views/ConduitRoutingSettingsWindow.xaml.cs",
+      "sha256": "541a41b848a2d42ce438e38bce47675963a397f15035c8733646b09181561c5f"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);**/obj/**;**/bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'RevitRouteLab'">
+    <RevitVersion Condition="'$(RevitVersion)' == ''">2024</RevitVersion>
+    <BaseIntermediateOutputPath>obj\$(RevitVersion)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>

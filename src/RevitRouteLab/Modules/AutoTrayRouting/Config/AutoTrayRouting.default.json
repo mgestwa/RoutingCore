@@ -1,0 +1,19 @@
+{
+  "searchRadius_mm": 15000,
+  "searchRadiusZ_mm": 4000,
+  "minStraight_mm": 200,
+  "minClearance_mm": 50,
+  "minBendRadius_mm": 100,
+  "defaultServiceType": "Power",
+  "connectorOffset_mm": 50,
+  "penalties": {
+    "levelChange": 3.0,
+    "dimensionMismatch": 1.5,
+    "serviceTypeMismatch": 2.0,
+    "joinFittings": 1.0
+  },
+  "serviceTypeMapping": [
+    { "ruleType": "NameStartsWith", "pattern": "LP-", "serviceType": "Power" },
+    { "ruleType": "ParameterContains", "parameterName": "System", "pattern": "ICT", "serviceType": "Data" }
+  ]
+}

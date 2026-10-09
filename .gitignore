@@ -1,0 +1,66 @@
+# .NET build output and generated WPF projects
+[Bb]in/
+[Oo]bj/
+*_wpftmp.csproj
+
+# Generated Revit add-in packages and delivery checksums
+/artifacts/
+/delivery-sha256.json
+
+# Visual Studio, Rider and per-user IDE settings
+.vs/
+.idea/
+_ReSharper*/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.iml
+*.DotSettings.user
+*.code-workspace
+
+# Test output, coverage and diagnostics
+[Tt]est[Rr]esults/
+coverage/
+coverage-report/
+*.coverage
+*.coveragexml
+*.trx
+*.log
+*.binlog
+*.dmp
+BenchmarkDotNet.Artifacts/
+
+# Restored packages and compiled binaries (including local Revit API DLLs)
+packages/
+*.nupkg
+*.snupkg
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Local environment settings; example files can be committed
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Temporary files, editor backups and operating-system metadata
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Revit automatic backup files; intentional sample models stay visible
+*.[0-9][0-9][0-9][0-9].rvt
+*.[0-9][0-9][0-9][0-9].rfa
+*_backup/
+
+# Keep source code, XAML, project/solution files, scripts, documentation,
+# extraction-manifest.json and default JSON configuration in the repository.

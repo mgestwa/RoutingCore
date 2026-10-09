@@ -1,0 +1,192 @@
+<Window x:Class="INP_IE.ConduitRouting.Views.ConduitRoutingSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Conduit Routing"
+        SizeToContent="Height"
+        Width="840"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FF2D2D30"
+        Foreground="White">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF9CDCFE"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,16,0,6"/>
+        </Style>
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFCCCCCC"/>
+            <Setter Property="Margin" Value="0,0,0,3"/>
+        </Style>
+        <Style x:Key="HintText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF8A8A8A"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="Background" Value="#FF1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+            <Setter Property="CaretBrush" Value="White"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+        <Style x:Key="AccentButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="18,7"/>
+            <Setter Property="Margin" Value="8,0,0,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF3E3E42"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="18,7"/>
+            <Setter Property="Margin" Value="8,0,0,0"/>
+            <Setter Property="BorderBrush" Value="#FF555555"/>
+        </Style>
+    </Window.Resources>
+
+    <Border Padding="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="390"/>
+                <ColumnDefinition Width="28"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Kolumna ustawień -->
+            <StackPanel Grid.Column="0">
+                <TextBlock x:Name="HeaderTextBlock" Text="Trasowanie conduitów" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock x:Name="SubtitleTextBlock" Foreground="#FF9CDCFE" Margin="0,3,0,0"/>
+
+                <TextBlock Style="{StaticResource SectionHeader}" Text="CONDUIT"/>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Typ conduita"/>
+                <ComboBox x:Name="ConduitTypeComboBox" DisplayMemberPath="Name" SelectionChanged="OnConduitTypeChanged"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Średnica [mm]"/>
+                        <ComboBox x:Name="DiameterComboBox" DisplayMemberPath="Display" SelectionChanged="OnSettingsChanged"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Tolerancja łączenia [mm]"/>
+                        <TextBox x:Name="ConnectionToleranceTextBox" Text="180" TextChanged="OnSettingsChanged"
+                                 ToolTip="Maksymalna odległość między końcami conduitów, przy której zostaną połączone kształtką."/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Style="{StaticResource SectionHeader}" Text="ROZMIESZCZENIE W PRZEKROJU KORYTKA"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Odstęp między conduitami [mm]"/>
+                        <TextBox x:Name="SpacingTextBox" Text="0" TextChanged="OnSettingsChanged"
+                                 ToolTip="Wolna przestrzeń między sąsiednimi conduitami. Rozstaw torów = średnica + odstęp."/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Margines od krawędzi [mm]"/>
+                        <TextBox x:Name="MarginTextBox" Text="0" TextChanged="OnSettingsChanged"
+                                 ToolTip="Strefa przy krawędziach korytka, w której conduity nie będą umieszczane."/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Style="{StaticResource HintText}"
+                           Text="Tory są przydzielane deterministycznie od środka korytka (0, +1, −1, +2, ...). Każda relacja utrzymuje swój tor na całej trasie."/>
+
+                <TextBlock Style="{StaticResource SectionHeader}" Text="PRZERWY W TRASIE KABLOWEJ"/>
+                <CheckBox x:Name="AllowGapBridgingCheckBox" Foreground="White" Margin="0,0,0,8"
+                          Content="Przechodź przez przerwy między korytkami"
+                          Checked="OnBridgingToggled" Unchecked="OnBridgingToggled"
+                          ToolTip="Pozwala poprowadzić conduit tam, gdzie brakuje kształtki łączącej korytka. Uruchamia się dopiero wtedy, gdy trasy po połączonej sieci nie da się wyznaczyć."/>
+                <Grid x:Name="GapSettingsGrid" IsEnabled="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Maks. przerwa [mm]"/>
+                        <TextBox x:Name="MaxGapTextBox" Text="1500" TextChanged="OnSettingsChanged"
+                                 ToolTip="Największa długość mostka nad przerwą, mierzona po łamanej conduitu."/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Maks. rozminięcie osi [mm]"/>
+                        <TextBox x:Name="MaxGapOffsetTextBox" Text="300" TextChanged="OnSettingsChanged"
+                                 ToolTip="Dopuszczalne boczne przesunięcie osi dwóch korytek. Powyżej tej wartości przerwa nie zostanie zmostkowana."/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Style="{StaticResource HintText}"
+                           Text="Mostkowanie jest ostatecznością — trasa po połączonych korytkach zawsze ma pierwszeństwo. Każda pokonana przerwa jest wypisana w podglądzie i w raporcie."/>
+
+                <TextBlock Style="{StaticResource SectionHeader}" Text="ZEJŚCIA DO URZĄDZEŃ"/>
+                <CheckBox x:Name="AllowFreeAirLegsCheckBox" Foreground="White" Margin="0,0,0,8"
+                          Content="Doprowadź conduit aż do urządzenia"
+                          Checked="OnFreeAirToggled" Unchecked="OnFreeAirToggled"
+                          ToolTip="Trasa dobiega do punktu podłączenia urządzenia. Odejście od korytka wypada naprzeciw urządzenia — conduit trzyma się trasy kablowej najdłużej jak się da. Bez tej opcji trasa kończy się na korytku."/>
+                <Grid x:Name="FreeAirSettingsGrid" IsEnabled="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Maks. długość zejścia [mm]"/>
+                        <TextBox x:Name="MaxFreeAirLengthTextBox" Text="6000" TextChanged="OnSettingsChanged"
+                                 ToolTip="Najdłuższe dopuszczalne zejście od korytka do urządzenia, mierzone po łamanej conduitu."/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource FieldLabel}" Text="Min. długość ostatniego skosu [mm]"/>
+                        <TextBox x:Name="FreeAirTaperTextBox" Text="300" TextChanged="OnSettingsChanged"
+                                 ToolTip="Minimalna długość ostatniego odcinka zbieżnego do osi urządzenia. Nie jest tworzony osobny krótki fragment wymagający dodatkowego kolanka."/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Style="{StaticResource HintText}"
+                           Text="Zejście wychodzi poza przekrój korytka, biegnie nad punkt urządzenia, potem pionowo w jego osi. Odcinki w powietrzu nie rezerwują torów korytka i nie są sprawdzane pod kątem kolizji z budynkiem ani z innymi odcinkami w powietrzu."/>
+
+                <TextBlock Style="{StaticResource SectionHeader}" Text="KONTROLA DŁUGOŚCI TRASY"/>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Maks. objazd (× odległość w linii prostej)"/>
+                <TextBox x:Name="MaxDetourFactorTextBox" Text="4" TextChanged="OnSettingsChanged"
+                         ToolTip="Relacja zostanie pominięta, jeśli najkrótsza trasa po korytkach jest tyle razy dłuższa od odległości między panelem a odbiorem. Wpisz 0, aby wyłączyć kontrolę."/>
+                <TextBlock Style="{StaticResource HintText}"
+                           Text="Chroni przed podpięciem odbioru przez sieć prowadzącą naokoło obiektu. Pominięta relacja dostaje w raporcie obie długości."/>
+
+                <TextBlock x:Name="ValidationTextBlock" Foreground="#FFF48771" TextWrapping="Wrap"
+                           Margin="0,10,0,0" Visibility="Collapsed"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button Content="Anuluj" Style="{StaticResource SecondaryButton}" Click="CancelButton_Click"/>
+                    <Button x:Name="CreateButton" Content="Utwórz" Style="{StaticResource AccentButton}" Click="OkButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Kolumna podglądu -->
+            <StackPanel Grid.Column="2">
+                <TextBlock Style="{StaticResource SectionHeader}" Text="PODGLĄD NOMINALNEJ POJEMNOŚCI" Margin="0,0,0,6"/>
+                <TextBlock Style="{StaticResource FieldLabel}" Text="Korytko referencyjne z otoczenia końców relacji"/>
+                <ComboBox x:Name="TrayPreviewComboBox" DisplayMemberPath="Description" SelectionChanged="OnSettingsChanged"/>
+                <TextBlock Style="{StaticResource HintText}" Margin="0,4,0,6"
+                           Text="To kontrola geometryczna wybranego przekroju. Istniejące conduity i rzeczywiste wspólne odcinki relacji zostaną uwzględnione podczas przygotowania planu w następnym kroku."/>
+                <Border Background="#FF1E1E1E" BorderBrush="#FF3F3F46" BorderThickness="1" Padding="8" Margin="0,2,0,8">
+                    <Canvas x:Name="PreviewCanvas" Width="380" Height="200" SnapsToDevicePixels="True"/>
+                </Border>
+                <TextBlock x:Name="CapacityTextBlock" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                <TextBlock x:Name="PreviewSummaryTextBlock" Style="{StaticResource HintText}" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
