@@ -1,80 +1,113 @@
-# Revit Route Lab
+# RoutingCore · Revit Route Lab
 
-Niezależna mikroaplikacja w formie dodatku do Autodesk Revit, wydzielona przez **kopiowanie** modułów z INP_IE dnia 2026-10-09. Rozwiązanie: `RevitRouteLab.sln`.
+**Wyznaczanie tras instalacyjnych w modelu BIM — C#, algorytmy grafowe i integracja z Autodesk Revit.**
 
-## Co zawiera
+Revit Route Lab zamienia sieć korytek kablowych w graf, wyszukuje trasę między wskazanymi punktami lub urządzeniami i przygotowuje geometrię rur osłonowych (*conduitów*). Uwzględnia połączenia między elementami, dopuszczalne przerwy w sieci oraz miejsce zajęte przez istniejące conduity.
 
-- Wyszukiwanie najkrótszej trasy po grafie korytek, także przez wskazane korytko.
-- Zbieranie sieci konektorów, budowanie grafu i mostkowanie dopuszczalnych przerw.
-- Automatyczny dobór końców trasy przy urządzeniach, opcjonalne zejścia poza korytka.
-- Przydzielanie miejsca w przekroju korytka z uwzględnieniem istniejących conduitów.
-- Planowanie i tworzenie conduitów oraz połączeń.
-- Dotychczasowy AutoTrayRouter: wyszukiwanie korytek, geometryczne planowanie dojścia i tworzenie geometrii.
-- Własną kartę **Route Lab**, pięć poleceń, okno ustawień i przegląd planu przed utworzeniem conduitów.
+Projekt pokazuje zastosowanie C# do problemu inżynierskiego: od odwzorowania danych modelu i doboru algorytmu, przez obliczenia geometryczne, po interfejs użytkownika i zapis elementów przez API aplikacji desktopowej.
 
-**Algorytm najkrótszej ścieżki w źródle to Dijkstra, nie A\*.** Nie znaleziono implementacji A* i nie dodawano nowego algorytmu pod tą nazwą. `PathPlanner` w AutoTrayRouting buduje geometryczne odcinki trasy, a `CableTraySearchService` ocenia kandydatów. Nie jest to ogólny solver omijający wszystkie przeszkody budowlane w modelu.
+**Technologie:** C# · .NET 8 · .NET Framework 4.8 · WPF / XAML · Revit API · LINQ · Newtonsoft.Json · PowerShell
 
-## Niezależność od INP_IE
+[Najważniejsze fragmenty kodu](#co-pokazuje-kod) · [Architektura](#architektura) · [Testy bez Revita](#sprawdź-algorytm-bez-revita) · [Uruchomienie](#uruchomienie-w-revicie)
 
-53 pliki w `src/RevitRouteLab/Modules` skopiowano bez zmiany zawartości. Ich pochodzenie i sumy SHA-256 zawiera `extraction-manifest.json`. Zachowano historyczne przestrzenie nazw `INP_IE.*`, lecz są kompilowane do osobnej biblioteki **RevitRouteLab.dll**. Nie ma odwołania do projektu ani biblioteki INP_IE, dowiązań do oryginalnych plików ani wspólnego kroku wdrożenia.
+## Problem, który rozwiązuje
 
-Nowy kod uruchamiający znajduje się w `Application.cs` i `Commands/RoutingCommands.cs`. Dodatek ma osobny AddInId, własny manifest i własny katalog instalacyjny. Nie zawiera bazy relacji Circuit Managera, obsługi obwodów, Excela, monitoringu ani pozostałych narzędzi INP_IE. Polecenia mikroaplikacji nie rejestrują relacji i nie zapisują metadanych `INP_Relacja*`. Skopiowana klasa `ConduitMetadataWriter` pozostaje zależnością serwisu, lecz przy pustych metadanych nie wykonuje zapisów.
+Najbliższe korytko nie musi prowadzić do celu. Najkrótsza droga w linii prostej może przecinać przerwę w sieci, a poprawna ścieżka po korytkach wymaga jeszcze wyznaczenia miejsca na conduit w ich przekroju.
 
-Budowanie i testy nie instalują dodatku. Uruchomienie polecenia tworzenia geometrii po ręcznej instalacji zmienia otwarty model Revit zgodnie z wybranym działaniem; samo przygotowanie planu i opcja pokazania korytek nie tworzą elementów.
+Dodatek łączy te etapy w jeden proces: odczytuje połączenia, porównuje koszty dostępnych dróg, planuje odcinki i przedstawia wynik przed utworzeniem conduitów. Użytkownik może obejrzeć długość trasy i ostrzeżenia, zaznaczyć wykorzystane korytka albo zatwierdzić utworzenie geometrii.
 
-## Wymagania i kompilacja
+Przykładowy scenariusz: wskazanie dwóch urządzeń, znalezienie połączonych korytek w ich otoczeniu, wyznaczenie drogi przez sieć i opcjonalne dodanie zejść do urządzeń. Jeżeli trasa musi przejść przez konkretne korytko, można narzucić ten warunek podczas wyszukiwania.
 
-- Windows, .NET SDK obsługujący .NET 8 oraz .NET Framework 4.8 Developer Pack dla Revita 2024.
-- Revit odpowiedniej wersji lub dostęp do jego `RevitAPI.dll` i `RevitAPIUI.dll`.
-- NuGet `Newtonsoft.Json` 13.0.3, zgodny z kopiowanym kodem. Pierwsze odtwarzanie pakietów może wymagać internetu.
+## Co pokazuje kod
 
-W PowerShell, z katalogu mikroaplikacji:
+| Obszar | Rozwiązanie w projekcie | Przykład implementacji |
+| --- | --- | --- |
+| **Algorytmy i struktury danych** | Dijkstra na grafie ważonym; `Dictionary`, `SortedSet` i własne komparatory do przechowywania kosztów, wyboru kolejnego stanu i rozstrzygania remisów. | [ConduitPathfinder.cs](src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPathfinder.cs) |
+| **Modelowanie w C#** | Stan wyszukiwania jako `readonly struct` z `IEquatable<T>`; modele krawędzi, planu wykonania i raportu oddzielają dane od operacji na dokumencie. | [ConduitExecutionPlan.cs](src/RevitRouteLab/Modules/ConduitManager/Models/ConduitExecutionPlan.cs), [TrayGraphEdge.cs](src/RevitRouteLab/Modules/ConduitManager/Models/TrayGraphEdge.cs) |
+| **Geometria i ograniczenia przestrzenne** | Dobór toru w przekroju korytka z uwzględnieniem średnicy, odstępów oraz istniejących conduitów; kontekst zajętości przechowuje również rezerwacje planowanych osi. | [ConduitPositionAllocator.cs](src/RevitRouteLab/Modules/ConduitManager/Services/ConduitPositionAllocator.cs), [ConduitAllocationContext.cs](src/RevitRouteLab/Modules/ConduitManager/Services/ConduitAllocationContext.cs) |
+| **Integracja z API** | Odczyt konektorów i elementów modelu, budowa sieci, tworzenie geometrii w transakcji oraz obsługa wyjątków i wycofania operacji. | [TrayNetworkCollector.cs](src/RevitRouteLab/Modules/ConduitManager/Services/TrayNetworkCollector.cs), [ConduitRoutingService.cs](src/RevitRouteLab/Modules/ConduitRouting/Services/ConduitRoutingService.cs) |
+| **Aplikacja desktopowa** | Okno ustawień WPF, graficzny podgląd przekroju, polecenia `IExternalCommand` i wspólna obsługa anulowania oraz przeglądu planu. | [ConduitRoutingSettingsWindow.xaml](src/RevitRouteLab/Modules/ConduitRouting/Views/ConduitRoutingSettingsWindow.xaml), [RoutingCommands.cs](src/RevitRouteLab/Commands/RoutingCommands.cs) |
+| **Weryfikacja algorytmów** | Scenariusze brzegowe i porównanie wyników na losowych grafach z niezależną implementacją Floyda–Warshalla. | [Program.cs — testy algorytmu](tests/Routing.AlgorithmChecks/Program.cs) |
 
-```powershell
-.\scripts\Build.ps1 -RevitVersion 2024
-.\scripts\Build.ps1 -RevitVersion 2025
+### Trzy istotne decyzje projektowe
+
+**Wymuszone korytko jest częścią stanu wyszukiwania.** Stan zawiera klucz węzła i informację, czy wymagana krawędź została już przebyta. Pozwala to znaleźć najtańszą drogę spełniającą warunek; samo dotknięcie konektora wskazanego korytka nie wystarcza.
+
+**Dobór końców trasy uwzględnia koszt przejścia przez sieć.** Metoda `ComputeDistances` wyznacza koszty do wszystkich osiągalnych węzłów w jednym przebiegu. [Usługa doboru końców](src/RevitRouteLab/Modules/ConduitManager/Services/ConduitAutomaticEndpointLocatorService.cs) wykorzystuje te wyniki przy ocenie kandydatów. Dopuszczalne mostki nad przerwami mają dodatkowy koszt, dzięki czemu mogą być porównywane z objazdem po połączonych korytkach.
+
+**Planowanie jest oddzielone od tworzenia elementów.** `ConduitExecutionPlan` przechowuje geometrię, ustawienia i raport. Polecenia trasowania conduitów najpierw przygotowują plan, następnie pokazują go użytkownikowi, a po zatwierdzeniu przekazują do wykonania w transakcji Revita.
+
+## Architektura
+
+Przepływ dla wyznaczania trasy conduitu:
+
+```mermaid
+flowchart TD
+    A[Wybór punktów lub urządzeń] --> B[Ustawienia WPF]
+    B --> C[Odczyt sieci i budowa grafu]
+    C --> D[Dijkstra i ograniczenia trasy]
+    D --> E[Plan geometrii i dobór toru]
+    E --> F[Przegląd planu]
+    F --> G[Zaznaczenie korytek bez tworzenia elementów]
+    F --> H[Zatwierdzenie i utworzenie geometrii]
 ```
 
-Revit 2024 używa `net48`, a 2025 używa `net8.0-windows`. Zweryfikowano kompilację obu wersji. **Revit 2026 nie jest obsługiwany przez wiernie skopiowany kod**: usunięto w nim `ElementId.IntegerValue`, używane w modułach źródłowych. Migracja do 64-bitowych identyfikatorów wymaga osobnej zmiany. Starszych wersji niż 2024 nie weryfikowano.
-
-Inna lokalizacja API:
-
-```powershell
-.\scripts\Build.ps1 -RevitVersion 2024 -RevitApiPath 'D:\RevitAPI\2024'
+```text
+src/RevitRouteLab/
+├── Application.cs              # Karta i przyciski dodatku
+├── Commands/                   # Polecenia i przebieg interakcji
+└── Modules/
+    ├── ConduitManager/         # Graf, wyszukiwanie, geometria, przydział torów
+    ├── ConduitRouting/         # Ustawienia WPF i wykonanie planu
+    └── AutoTrayRouting/        # Planowanie dojść i tworzenie połączeń korytek
+tests/Routing.AlgorithmChecks/  # Konsolowa weryfikacja algorytmu
+scripts/                       # Kompilacja, pakowanie, instalacja
+docs/                          # Architektura i wyniki weryfikacji
 ```
 
-Gotowe paczki są w `artifacts/Revit2024` i `artifacts/Revit2025`. Każda zawiera manifest `RevitRouteLab.addin` i podkatalog `RevitRouteLab/<rok>` z biblioteką, symbolami, Newtonsoft.Json i konfiguracją AutoTrayRouting. Biblioteki Autodesk nie są dystrybuowane.
+Moduły trasowania wydzielono z większej aplikacji INP_IE do niezależnego dodatku z własną biblioteką, identyfikatorem i procesem budowania. Zachowane przestrzenie nazw `INP_IE.*` odzwierciedlają pochodzenie kodu; projekt nie wymaga oryginalnej aplikacji. Granice modułów i ich odpowiedzialności opisuje [mapa architektury](docs/ARCHITECTURE.md).
 
-## Instalacja opcjonalna
+## Sprawdź algorytm bez Revita
 
-Zamknij Revit, a następnie uruchom:
-
-```powershell
-.\scripts\Install.ps1 -RevitVersion 2024
-```
-
-Skrypt kopiuje wyłącznie Route Lab do `%APPDATA%/Autodesk/Revit/Addins/2024`. Nie nadpisuje istniejącej instalacji Route Lab; przy kolizji kończy działanie. Aby odinstalować dodatek, przy zamkniętym Revicie usuń wyłącznie `RevitRouteLab.addin` i katalog `RevitRouteLab` z katalogu dodatków danej wersji. Pliki INP_IE pozostają oddzielne.
-
-## Użycie
-
-1. **Między punktami** — wskaż dwa punkty na prostych korytkach, ustaw parametry conduitu i przejrzyj plan. Wybierz utworzenie geometrii albo zaznaczenie korytek trasy bez tworzenia elementów.
-2. **Przez korytko** — dodatkowo wskaż proste korytko, które trasa musi faktycznie przejść.
-3. **Między urządzeniami** — wskaż kolejno początek i koniec. Dobór pobliskich korytek uwzględnia koszt trasy; zejścia poza korytka i mostkowanie zależą od ustawień.
-4. **Conduit w korytkach** — zaznacz korytka/kształtki lub wskaż je po uruchomieniu. Zachowano źródłowe zachowanie tworzenia pojedynczej reprezentacji conduitu.
-5. **Auto korytka** — przed uruchomieniem zaznacz dokładnie dwa elementy źródłowe. Wybierz korytka, conduit 25 mm lub oba. Ten starszy moduł uruchamia tworzenie geometrii bez etapu przeglądu planu.
-
-Wyszukiwanie i tworzenie wymagają odpowiedniej geometrii, typów conduitów/korytek oraz rodzin kształtek w modelu. Moduł pracuje na elementach aktywnego dokumentu; nie dodano trasowania po modelach podlinkowanych. `Esc` anuluje wybór elementów. Przegląd planu pokazuje długość, przejścia przez przerwy, zejścia i ostrzeżenia. Zaznaczenie korytek jest podglądem elementów źródłowych, a nie rysunkiem projektowanej osi conduitu.
-
-## Weryfikacja
+Do uruchomienia testów wystarczy .NET SDK obsługujący .NET 8. Z katalogu repozytorium:
 
 ```powershell
-.\scripts\Verify-Extraction.ps1
-.\scripts\Verify-Extraction.ps1 -CompareWithSource
 dotnet run --project .\tests\Routing.AlgorithmChecks -c Release
 ```
 
-Pierwsze polecenie sprawdza zgodność kopii z zapisanym stanem. Drugie wymaga dostępu do oryginalnego katalogu i sprawdza także źródła. Po celowej modyfikacji skopiowanych modułów kontrola wykaże różnice — to oczekiwane.
+Zestaw weryfikacyjny wykonał **15 188 asercji**, obejmujących scenariusze brzegowe oraz **100 losowych grafów** z ustalonym ziarnem generatora. Sprawdza m.in. koszt i ciągłość ścieżki, kierunki krawędzi, brak połączenia, remisy, cykle o zerowym koszcie, wymuszone korytko i koszt mostka.
 
-Testy kompilują bezpośrednio skopiowany `ConduitPathfinder`, `TrayGraph`, `TrayGraphEdge` i klasyfikator. Minimalne zastępniki typów Autodesk są używane tylko w testach algorytmu; nie symulują geometrii ani transakcji Revita. Sprawdzono trasy ważone, brak połączenia, kierunki krawędzi, remisy, zerowe cykle, wymuszone korytko, karę mostka i 100 losowych grafów względem niezależnego algorytmu Floyda–Warshalla. Łącznie: **15 188 sprawdzeń**.
+Testy kompilują bezpośrednio kod grafu i wyszukiwania używany przez dodatek. Minimalne zastępniki typów Autodesk pozwalają wykonać obliczenia poza Revitem. Zakres tych testów obejmuje logikę grafową; geometria i transakcje wymagają osobnej weryfikacji w aplikacji.
 
-Kompilacja zgłasza odziedziczone ostrzeżenia dotyczące null i starszego API. Nie wykonywano testu wewnątrz działającego Revita. Scenariusze ręcznej weryfikacji opisano w `docs/REVIT-SMOKE-TESTS.md`, a wyniki kontroli w `docs/VALIDATION.md`.
+## Uruchomienie w Revicie
+
+Wymagania: Windows, .NET SDK, Revit odpowiedniej wersji lub jego biblioteki API. Dla Revita 2024 potrzebny jest również .NET Framework 4.8 Developer Pack. Zależności NuGet są odtwarzane podczas budowania.
+
+| Wersja Revita | Platforma | Zweryfikowany etap |
+| --- | --- | --- |
+| 2024 | .NET Framework 4.8 | Kompilacja i przygotowanie paczki |
+| 2025 | .NET 8 / Windows | Kompilacja i przygotowanie paczki |
+
+```powershell
+# Zbuduj dodatek dla wybranej wersji
+.\scripts\Build.ps1 -RevitVersion 2024
+
+# Po zamknięciu Revita zainstaluj przygotowaną paczkę
+.\scripts\Install.ps1 -RevitVersion 2024
+```
+
+Dla Revita 2025 użyj `-RevitVersion 2025`. Niestandardową lokalizację API można przekazać przez `-RevitApiPath 'D:\RevitAPI\2024'`. Paczki są generowane do `artifacts/Revit<rok>` i pomijane przez Git. Samo budowanie nie instaluje dodatku.
+
+Po instalacji karta **Route Lab** udostępnia pięć poleceń:
+
+- **Między punktami** — trasa między punktami na prostych korytkach.
+- **Przez korytko** — trasa z obowiązkowym przejściem przez wskazany odcinek.
+- **Między urządzeniami** — automatyczny dobór końców trasy, z opcjonalnymi zejściami.
+- **Conduit w korytkach** — tworzenie conduitu w wybranych korytkach i kształtkach.
+- **Auto korytka** — tworzenie korytek, conduitów lub obu dla dwóch zaznaczonych elementów źródłowych. Ten moduł ma osobny przebieg i uruchamia tworzenie bez przeglądu planu.
+
+## Status i zakres
+
+W repozytorium znajdują się wyniki kompilacji i testów algorytmicznych. Uruchomienie tej wydzielonej wersji dodatku wewnątrz Revita pozostaje do zweryfikowania według [scenariuszy ręcznych](docs/REVIT-SMOKE-TESTS.md). Szczegółowy [raport walidacji](docs/VALIDATION.md) opisuje również ostrzeżenia kompilatora i zgodność z API.
+
+Trasowanie działa na sieci korytek aktywnego dokumentu. Wyszukiwanie wykorzystuje **algorytm Dijkstry**; przydział torów uwzględnia zajętość conduitami, ale projekt nie zapewnia ogólnego omijania wszystkich przeszkód budowlanych. Revit 2026 wymaga migracji obsługi identyfikatorów elementów i obecnie nie jest obsługiwany.
